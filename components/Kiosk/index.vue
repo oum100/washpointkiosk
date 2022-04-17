@@ -190,7 +190,7 @@ export default {
           assetname: 'WM-0005',
           uuid: 'ECM3VZMCCVBP005',
           type: 'washer',
-          state: 'offline',
+          state: 'ready',
           productPicked: { sku: 'MA10000106-01', dispSku: 'Worm', price: 40, qty: 30, enable: 1 },
           products: [
             { sku: 'MA10000106-01', dispSku: 'Cold', price: 30, qty: 25 },
@@ -337,69 +337,69 @@ export default {
         { status: 'booked', color: 'blue' },
         { status: 'offline', color: 'gray' },
       ],
-    }
+    };
   },
   computed: {
     calTotalPrice() {
       return this.carts.reduce(function (accumulate, cart) {
-        return accumulate + cart.price
-      }, 0)
+        return accumulate + cart.price;
+      }, 0);
     },
     activeSubmit() {
-      if (this.calTotalPrice > 0) return 'active'
-      return 'disable'
+      if (this.calTotalPrice > 0) return 'active';
+      return 'disable';
     },
   },
   methods: {
     selectPrice(item) {
-      const inx = this.assets.findIndex((x) => x.assetname === item)
+      const inx = this.assets.findIndex((x) => x.assetname === item);
 
       // alert(this.assets[inx].productPicked.price)
 
       switch (this.assets[inx].productPicked.price) {
         case this.assets[inx].products[0].price: // Price 30
           if (this.assets[inx].products.length === 1) {
-            this.delItem(item, 'ready')
+            this.delItem(item, 'ready');
           } else {
-            this.delItem(item, 'ready')
-            this.assets[inx].productPicked.price = this.assets[inx].products[1].price // Set Price to 40
-            this.assets[inx].productPicked.sku = this.assets[inx].products[1].sku
-            this.assets[inx].productPicked.dispSku = this.assets[inx].products[1].dispSku
-            this.assets[inx].productPicked.qty = this.assets[inx].products[1].qty
+            this.delItem(item, 'ready');
+            this.assets[inx].productPicked.price = this.assets[inx].products[1].price; // Set Price to 40
+            this.assets[inx].productPicked.sku = this.assets[inx].products[1].sku;
+            this.assets[inx].productPicked.dispSku = this.assets[inx].products[1].dispSku;
+            this.assets[inx].productPicked.qty = this.assets[inx].products[1].qty;
           }
-          break
+          break;
         case this.assets[inx].products[1].price: // Price 40
           switch (this.assets[inx].products.length) {
             case 2:
-              this.delItem(item, 'booked')
-              this.assets[inx].productPicked.price = this.assets[inx].products[0].price // Set Price to 30
-              this.assets[inx].productPicked.sku = this.assets[inx].products[0].sku
-              this.assets[inx].productPicked.dispSku = this.assets[inx].products[0].dispSku
-              this.assets[inx].productPicked.qty = this.assets[inx].products[0].qty
-              this.addItem(item)
-              break
+              this.delItem(item, 'booked');
+              this.assets[inx].productPicked.price = this.assets[inx].products[0].price; // Set Price to 30
+              this.assets[inx].productPicked.sku = this.assets[inx].products[0].sku;
+              this.assets[inx].productPicked.dispSku = this.assets[inx].products[0].dispSku;
+              this.assets[inx].productPicked.qty = this.assets[inx].products[0].qty;
+              this.addItem(item);
+              break;
             case 3:
-              this.delItem(item, 'booked')
-              this.assets[inx].productPicked.price = this.assets[inx].products[2].price // Set Price to 50
-              this.assets[inx].productPicked.sku = this.assets[inx].products[2].sku
-              this.assets[inx].productPicked.dispSku = this.assets[inx].products[2].dispSku
-              this.assets[inx].productPicked.qty = this.assets[inx].products[2].qty
-              this.addItem(item)
-              break
+              this.delItem(item, 'booked');
+              this.assets[inx].productPicked.price = this.assets[inx].products[2].price; // Set Price to 50
+              this.assets[inx].productPicked.sku = this.assets[inx].products[2].sku;
+              this.assets[inx].productPicked.dispSku = this.assets[inx].products[2].dispSku;
+              this.assets[inx].productPicked.qty = this.assets[inx].products[2].qty;
+              this.addItem(item);
+              break;
           }
-          break
+          break;
         case this.assets[inx].products[2].price: // Price 50
-          this.delItem(item, 'booked')
-          this.assets[inx].productPicked.price = this.assets[inx].products[0].price // Set Price to 30
-          this.assets[inx].productPicked.sku = this.assets[inx].products[0].sku
-          this.assets[inx].productPicked.dispSku = this.assets[inx].products[0].dispSku
-          this.assets[inx].productPicked.qty = this.assets[inx].products[0].qty
-          this.addItem(item)
-          break
+          this.delItem(item, 'booked');
+          this.assets[inx].productPicked.price = this.assets[inx].products[0].price; // Set Price to 30
+          this.assets[inx].productPicked.sku = this.assets[inx].products[0].sku;
+          this.assets[inx].productPicked.dispSku = this.assets[inx].products[0].dispSku;
+          this.assets[inx].productPicked.qty = this.assets[inx].products[0].qty;
+          this.addItem(item);
+          break;
       }
     },
     addItem(item) {
-      const inx = this.assets.findIndex((x) => x.assetname === item)
+      const inx = this.assets.findIndex((x) => x.assetname === item);
 
       // alert(this.assets[inx].productPicked.price)
       // alert(this.assets[inx].productPicked.disabletxt)
@@ -413,37 +413,37 @@ export default {
         dispSku: this.assets[inx].productPicked.dispSku,
         qty: this.assets[inx].productPicked.qty,
         price: this.assets[inx].productPicked.price,
-      })
-      this.count++
-      this.assets[inx].state = 'booked'
-      this.assets[inx].productPicked.enable = 0
+      });
+      this.count++;
+      this.assets[inx].state = 'booked';
+      this.assets[inx].productPicked.enable = 0;
       // alert('Selectd machine:' + item)
     }, // inx is index of selected item
     delItem(item, state) {
-      const inx = this.carts.findIndex((x) => x.assetname === item)
+      const inx = this.carts.findIndex((x) => x.assetname === item);
       // alert(inx + ' item: ' + item)
 
       if (inx > -1) {
-        const assetinx = this.assets.findIndex((x) => x.assetname === item)
-        this.carts.splice(inx, 1)
-        this.assets[assetinx].state = state
-        this.count--
-        this.assets[assetinx].productPicked.enable = 1
+        const assetinx = this.assets.findIndex((x) => x.assetname === item);
+        this.carts.splice(inx, 1);
+        this.assets[assetinx].state = state;
+        this.count--;
+        this.assets[assetinx].productPicked.enable = 1;
       } // inx is index of selected item
     },
     clickSubmit() {
-      alert('UUID: ' + this.carts[0].uuid + ' AssetName: ' + this.carts[0].assetname + ' Sku: ' + this.carts[0].sku + ' Price: ' + this.carts[0].price + ' Qty: ' + this.carts[0].qty)
+      alert('UUID: ' + this.carts[0].uuid + ' AssetName: ' + this.carts[0].assetname + ' Sku: ' + this.carts[0].sku + ' Price: ' + this.carts[0].price + ' Qty: ' + this.carts[0].qty);
     },
     clickCancel() {
       this.carts.every((item) => {
-        this.assets[this.assets.findIndex((x) => x.assetname === item.assetname)].state = 'ready'
-        return true
-      })
-      this.carts = []
-      this.count = 0
+        this.assets[this.assets.findIndex((x) => x.assetname === item.assetname)].state = 'ready';
+        return true;
+      });
+      this.carts = [];
+      this.count = 0;
     },
   },
   watched: {},
-}
+};
 </script>
 <style></style>
