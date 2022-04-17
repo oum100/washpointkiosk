@@ -1,0 +1,29 @@
+{
+  "Home": {
+    "description": "Auto imported from components/Home/index.vue"
+  },
+  "Kiosk": {
+    "description": "Auto imported from components/Kiosk/index.vue"
+  },
+  "KioskMachine": {
+    "description": "Auto imported from components/Kiosk/machine.vue"
+  },
+  "User": {
+    "description": "Auto imported from components/User/index.vue"
+  },
+  "AuthLogin": {
+    "description": "Auto imported from components/Auth/Login/index.vue"
+  },
+  "AuthLoginXIndex": {
+    "description": "Auto imported from components/Auth/Login/x-index.vue"
+  },
+  "AuthRegister": {
+    "description": "Auto imported from components/Auth/Register/index.vue"
+  },
+  "LayoutsHeader": {
+    "description": "Auto imported from components/Layouts/Header/index.vue"
+  },
+  "LayoutsHeaderXIndex": {
+    "description": "Auto imported from components/Layouts/Header/x-index.vue"
+  }
+}
